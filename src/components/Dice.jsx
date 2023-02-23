@@ -1,40 +1,29 @@
+import { useState } from 'react';
+
 const Dice = () => {
+  const allNewDice = () => {
+    const diceArray = [];
+    for (let i = 0; i < 10; i++) {
+      diceArray.push(Math.ceil(Math.random() * 6));
+    }
+    return diceArray;
+  };
+
+  const [numbers, setNumbers] = useState(allNewDice());
+
+  const die = numbers.map((element, index) => {
+    return (
+      <span className="dice" key={index}>
+        {element}
+      </span>
+    );
+  });
+
   return (
     <>
-      <div className="dice-container">
-        <span className="dice">
-          6
-        </span>
-        <span className="dice green">
-          2
-        </span>
-        <span className="dice">
-          5
-        </span>
-        <span className="dice">
-          2
-        </span>
-        <span className="dice">
-          2
-        </span>
-        <span className="dice">
-          2
-        </span>
-        <span className="dice">
-          3
-        </span>
-        <span className="dice">
-          4
-        </span>
-        <span className="dice green">
-          2
-        </span>
-        <span className="dice">
-          1
-        </span>
-      </div>
+      <div className="dice-container">{die}</div>
     </>
-  )
-}
+  );
+};
 
 export default Dice;
