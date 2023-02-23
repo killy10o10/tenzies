@@ -83,6 +83,12 @@ font-size: 16.384px;
 line-height: 19px;
 width: 92.16px;
 height: 35.84px;
+transition: all .4s;  
+cursor: pointer;
+}
+
+.button:active {
+  transform: matrix(0.95, 0, 0, 0.95, 0, 0);
 }
 
 .green {
