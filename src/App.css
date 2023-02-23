@@ -58,7 +58,6 @@ p {
 }
 
 .dice {
-  background: #ffffff;
   box-shadow: 0px 2px 2px rgba(0, 0, 0, 0.15);
   border-radius: 3.81277px;
   font-size: 20.5889px;
@@ -91,6 +90,6 @@ p {
   transform: matrix(0.95, 0, 0, 0.95, 0, 0);
 }
 
-.green {
+/* .green {
   background-color: #59e391;
-}
+} */

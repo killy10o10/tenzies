@@ -1,11 +1,16 @@
 import { useState } from 'react';
+import { nanoid } from 'nanoid';
 import Dice from './Dice';
 
 const TenziBoard = () => {
   const allNewDice = () => {
     const diceArray = [];
     for (let i = 0; i < 10; i++) {
-      diceArray.push(Math.ceil(Math.random() * 6));
+      diceArray.push({
+        value: Math.ceil(Math.random() * 6),
+        isHeld: false,
+        id: nanoid(),
+      });
     }
     return diceArray;
   };
@@ -16,6 +21,10 @@ const TenziBoard = () => {
     setNumbers(allNewDice());
   };
 
+  const holdDice = (id) => {
+    console.log(id);
+  };
+
   return (
     <div className="board">
       <div className="play-board">
@@ -24,7 +33,7 @@ const TenziBoard = () => {
           Roll until all dice are the same. Click each die to freeze it at its
           current value between rolls.
         </p>
-        <Dice value={numbers} />
+        <Dice value={numbers} holdDice={holdDice} />
         <button onClick={rollDice} className="button">
           Roll
         </button>

@@ -1,8 +1,18 @@
 const Dice = (props) => {
-  const die = props.value.map((element, index) => {
+  const { value, holdDice } = props;
+
+  const die = value.map((element) => {
+    const styles = {
+      backgroundColor: element.isHeld ? '#59e391' : '#ffffff',
+    };
     return (
-      <span className="dice" key={index}>
-        {element}
+      <span
+        className="dice green"
+        onClick={() => holdDice(element.id)}
+        style={styles}
+        key={element.id}
+      >
+        {element.value}
       </span>
     );
   });
