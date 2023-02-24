@@ -22,7 +22,11 @@ const TenziBoard = () => {
   };
 
   const holdDice = (id) => {
-    console.log(id);
+    setNumbers((prevNum) =>
+      prevNum.map((die) =>
+        die.id === id ? { ...die, isHeld: !die.isHeld } : die
+      )
+    );
   };
 
   return (
