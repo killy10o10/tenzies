@@ -3,14 +3,18 @@ import { nanoid } from 'nanoid';
 import Dice from './Dice';
 
 const TenziBoard = () => {
+  const generateNewDie = () => {
+    return {
+      value: Math.ceil(Math.random() * 6),
+      isHeld: false,
+      id: nanoid(),
+    };
+  };
+
   const allNewDice = () => {
     const diceArray = [];
     for (let i = 0; i < 10; i++) {
-      diceArray.push({
-        value: Math.ceil(Math.random() * 6),
-        isHeld: false,
-        id: nanoid(),
-      });
+      diceArray.push(generateNewDie());
     }
     return diceArray;
   };
@@ -18,7 +22,9 @@ const TenziBoard = () => {
   const [numbers, setNumbers] = useState(allNewDice());
 
   const rollDice = () => {
-    setNumbers(allNewDice());
+    setNumbers((prevNum) =>
+      prevNum.map((die) => (die.isHeld ? die : generateNewDie()))
+    );
   };
 
   const holdDice = (id) => {
