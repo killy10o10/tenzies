@@ -1,4 +1,4 @@
-import { useState } from 'react';
+import { useEffect, useState } from 'react';
 import { nanoid } from 'nanoid';
 import Dice from './Dice';
 
@@ -20,6 +20,11 @@ const TenziBoard = () => {
   };
 
   const [numbers, setNumbers] = useState(allNewDice());
+  const [tenzies, setTenzies] = useState(false);
+
+  useEffect(() => {
+    console.log('dice state changed');
+  }, [numbers]);
 
   const rollDice = () => {
     setNumbers((prevNum) =>

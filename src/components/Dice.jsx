@@ -7,7 +7,7 @@ const Dice = (props) => {
     };
     return (
       <span
-        className="dice green"
+        className={`dice ${element.isHeld ? "wiggle" : ""}`}
         onClick={() => holdDice(element.id)}
         style={styles}
         key={element.id}
