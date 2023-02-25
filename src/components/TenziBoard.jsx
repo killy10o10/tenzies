@@ -1,6 +1,7 @@
 import { useEffect, useState } from 'react';
 import { nanoid } from 'nanoid';
 import Dice from './Dice';
+import Confetti from 'react-confetti';
 
 const TenziBoard = () => {
   const generateNewDie = () => {
@@ -50,6 +51,7 @@ const TenziBoard = () => {
   return (
     <div className="board">
       <div className="play-board">
+        {tenzies && <Confetti />}
         <h2 className="title">Tenzies</h2>
         <p>
           Roll until all dice are the same. Click each die to freeze it at its
@@ -57,7 +59,7 @@ const TenziBoard = () => {
         </p>
         <Dice value={numbers} holdDice={holdDice} />
         <button onClick={rollDice} className="button">
-          Roll
+          {tenzies ? 'New Game' : 'Roll'}
         </button>
       </div>
     </div>
