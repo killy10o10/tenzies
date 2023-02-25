@@ -1,49 +1,67 @@
-const TenziBoard = () => {
+import { useEffect, useState } from 'react';
+import { nanoid } from 'nanoid';
+import Dice from './Dice';
 
+const TenziBoard = () => {
+  const generateNewDie = () => {
+    return {
+      value: Math.ceil(Math.random() * 6),
+      isHeld: false,
+      id: nanoid(),
+    };
+  };
+
+  const allNewDice = () => {
+    const diceArray = [];
+    for (let i = 0; i < 10; i++) {
+      diceArray.push(generateNewDie());
+    }
+    return diceArray;
+  };
+
+  const [numbers, setNumbers] = useState(allNewDice());
+  const [tenzies, setTenzies] = useState(false);
+
+  useEffect(() => {
+    const isEveryDiceHeld = numbers.every((die) => die.isHeld);
+    const firstDiceValue = numbers[0].value;
+    const everyDiceValue = numbers.every((die) => {
+      if (die.value === firstDiceValue && isEveryDiceHeld) {
+        setTenzies(true);
+        console.log('Yay! You Win');
+      }
+    });
+  }, [numbers]);
+
+  const rollDice = () => {
+    setNumbers((prevNum) =>
+      prevNum.map((die) => (die.isHeld ? die : generateNewDie()))
+    );
+  };
+
+  const holdDice = (id) => {
+    setNumbers((prevNum) =>
+      prevNum.map((die) =>
+        die.id === id ? { ...die, isHeld: !die.isHeld } : die
+      )
+    );
+  };
 
   return (
-      <div className="board">
-          <div className="play-board">
-              <h2 className="title">Tenzies</h2>
-              <p>
-                Roll until all dice are the same. Click each die to freeze it at its current value between rolls.
-              </p>
-            <div className="dice-container">
-                <span className="dice">
-                  6
-                </span>
-                <span className="dice green">
-                  2
-                </span>
-                <span className="dice">
-                  5
-                </span>
-                <span className="dice">
-                  2
-                </span>
-                <span className="dice">
-                  2
-                </span>
-                <span className="dice">
-                  2
-                </span>
-                <span className="dice">
-                  3
-                </span>
-                <span className="dice">
-                  4
-                </span>
-                <span className="dice green">
-                  2
-                </span>
-                <span className="dice">
-                  1
-                </span>
-            </div>
-            <button className="button">Roll</button>
-          </div>
+    <div className="board">
+      <div className="play-board">
+        <h2 className="title">Tenzies</h2>
+        <p>
+          Roll until all dice are the same. Click each die to freeze it at its
+          current value between rolls.
+        </p>
+        <Dice value={numbers} holdDice={holdDice} />
+        <button onClick={rollDice} className="button">
+          Roll
+        </button>
       </div>
-  )
-}
+    </div>
+  );
+};
 
 export default TenziBoard;
