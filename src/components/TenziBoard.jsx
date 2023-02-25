@@ -23,7 +23,14 @@ const TenziBoard = () => {
   const [tenzies, setTenzies] = useState(false);
 
   useEffect(() => {
-    console.log('dice state changed');
+    const isEveryDiceHeld = numbers.every((die) => die.isHeld);
+    const firstDiceValue = numbers[0].value;
+    const everyDiceValue = numbers.every((die) => {
+      if (die.value === firstDiceValue && isEveryDiceHeld) {
+        setTenzies(true);
+        console.log('Yay! You Win');
+      }
+    });
   }, [numbers]);
 
   const rollDice = () => {
