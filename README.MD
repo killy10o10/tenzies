@@ -5,3 +5,6 @@
 > To use the app, simply visit the deployed version of the application (if available), or clone the repository and run it locally. Users can play the game against the computer or against other online players, and scores will be saved and displayed on a leaderboard.
 
 > Overall, this app provides a fun and engaging way to play the popular dice game of Tenzi with friends and other players around the world.
+
+https://user-images.githubusercontent.com/89058561/221389775-731370ca-9d0b-467a-9759-726b244c314e.mp4
+
