@@ -81,7 +81,7 @@ p {
   font-size: 16.384px;
   line-height: 19px;
   padding: 6.4px 21.12px;
-  width: 70px;
+  /* width: 70px; */
   transition: all 0.4s;
   cursor: pointer;
 }
