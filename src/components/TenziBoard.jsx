@@ -26,18 +26,22 @@ const TenziBoard = () => {
   useEffect(() => {
     const isEveryDiceHeld = numbers.every((die) => die.isHeld);
     const firstDiceValue = numbers[0].value;
-    const everyDiceValue = numbers.every((die) => {
-      if (die.value === firstDiceValue && isEveryDiceHeld) {
-        setTenzies(true);
-        console.log('Yay! You Win');
-      }
-    });
+    const isAllSame = numbers.every((die) => die.value === firstDiceValue);
+    if (isAllSame && isEveryDiceHeld) {
+      setTenzies(true);
+      console.log('Yay! You Win');
+    }
   }, [numbers]);
 
   const rollDice = () => {
-    setNumbers((prevNum) =>
-      prevNum.map((die) => (die.isHeld ? die : generateNewDie()))
-    );
+    if (!tenzies) {
+      setNumbers((prevNum) =>
+        prevNum.map((die) => (die.isHeld ? die : generateNewDie()))
+      );
+    } else {
+      setTenzies(false);
+      setNumbers(allNewDice());
+    }
   };
 
   const holdDice = (id) => {
